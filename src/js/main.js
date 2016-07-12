@@ -1,6 +1,6 @@
 import $ from 'jquery'
 import {flickr_pull} from "./api-files/flick-food-api.js";
-import { baseURL, requestAPI, newsTemplate, fancyMenuTemplate, alaydisMenuTemplate, log, newsToPage, fancyToPage, alaydisToPage } from "./api-files/restaurant-api.js"
+import { baseURL, requestAPI, newsTemplate, fancyMenuTemplate, alaydisMenuTemplate, log, newsToPage, fancyToPage, alaydisToPage, specialsInit } from "./api-files/restaurant-api.js"
 
 function toggleBorder (className) {
 	var names = [".tab_ourstory", ".tab_menu", ".tab_rsvp"];
@@ -11,7 +11,6 @@ function toggleBorder (className) {
 	console.log(removeBorders)
 	removeBorders.forEach(function (name) { $(name).removeClass("border"); });
 };
-
 $(".tab_ourstory").on('click', function (x){
 
 	toggleBorder(".tab_ourstory");
@@ -33,7 +32,8 @@ $(".tab_menu").on('click', function (x){
 
  	toggleBorder(".tab_menu");
 
-    requestAPI('/menu/1', fancyToPage)
+  requestAPI('/menu/1', fancyToPage)
+	specialsInit();
 });
 
 $(".tab_rsvp").on('click', function (x){
@@ -90,7 +90,7 @@ console.log(name);
          <span class="rsvp_guest rs">A Reservation of ${guest} Guest Attending</span>
           <span class="rsvp_seating rs">${seating} Seating</span>
          <span class="rsvp_special rs">${special}</span>
-        
+
        </div>`;
 
     $(".story_reso_div").append(rsvptemp);

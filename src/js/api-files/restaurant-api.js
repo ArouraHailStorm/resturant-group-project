@@ -143,7 +143,6 @@ var newsToPage = function(data){
 
 var fancyToPage = function(data){
     fancyMenuObj = data;
-        specialsInit();
         // This function call is here because specialsInit() depends on fancyMenuObj variable being set
                   console.log("function %cfancyToPage%c running, API request recieved","color:blue;", data)
                   console.log("adding api result %cappetizers%c to page","color:green;", data)
@@ -197,9 +196,12 @@ var specialsLogic = function(data){
     $(".special-item").append(fancyMenuTemplate(specialItem))
 };
 
-
+var SpecialLog = function(data){
+  var fancyMenuObj = data;
+}
 var specialsInit = function(data){
   console.log("function %cspecialsInit%c running","color:blue;","color:black;")
+  requestAPI('/menu/1', SpecialLog)
   requestAPI('/special/1',specialsLogic)
 };
 
@@ -222,4 +224,4 @@ requestAPI('/news/1',newsToPage)
 // =================================
 
 
-export { baseURL, requestAPI, newsTemplate, fancyMenuTemplate, alaydisMenuTemplate, log, newsToPage, fancyToPage, alaydisToPage };
+export { baseURL, requestAPI, newsTemplate, fancyMenuTemplate, alaydisMenuTemplate, log, newsToPage, fancyToPage, alaydisToPage, specialsInit };
